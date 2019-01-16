@@ -2,7 +2,6 @@ package mapreduce
 
 import (
 	"bufio"
-	"errors"
 	"strings"
 )
 
@@ -20,7 +19,7 @@ func (t *Word) Map(chunk string, result *map[int][]string) error {
 	scanner.Split(bufio.ScanWords)
 	for scanner.Scan() {
 		word = scanner.Text()
-		word = strings.Trim(word, ".,!?'\"\"")
+		word = strings.Trim(word, ".,:;()[]{}!?'\"\"")
 		wlen = len(word)
 		res[wlen] = append(res[wlen], word)
 	}
@@ -32,9 +31,15 @@ func (t *Word) Map(chunk string, result *map[int][]string) error {
 	return nil
 }
 
-func (t *Word) Reduce(args map[int]string, result *map[int]string) error {
-	if args == nil {
-		return errors.New("Divide by zero")
+
+func (t *Word) Reduce(reduceMap map[int][]string, result *map[int]int) error {
+
+	for k, words := range reduceMap {
+		// could it be 	(*result)[k] = len(words)
+		for _ = range words {
+			(*result)[k]++
+		}
 	}
+
 	return nil
 }
