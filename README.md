@@ -32,7 +32,7 @@ $ ./wlcount file1 [file2 ...]
 where *file1* and *file2* are the names of the files you want to count the words' lengths.
 Otherwise the workers can be run manually either on several terminals or in the same one running them in background, but it is important to remember to **delete *address.config*** file before each time you want to run a set of workers.
 
-The workers can be shutted down using the *killall* command, for example:
+The workers can be shut down using the *killall* command, for example:
 ```
 $ killall worker
 ```
