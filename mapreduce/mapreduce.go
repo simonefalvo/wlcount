@@ -11,6 +11,7 @@ import (
 // service for RPC
 type MapReduce int
 
+
 func (t *MapReduce) Map(chunk string, result *map[int][]string) error {
 
 	if len(chunk) == 0 {
