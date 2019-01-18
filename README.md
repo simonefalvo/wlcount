@@ -11,29 +11,37 @@ Word length count distributed RPC application.
 
 Download/clone the repository and build the [wlcount](wlcount.go) program
 ```
-go build wlcount.go
+$ go build wlcount.go
 ```
-Optionally you can build the [worker](worker.go) program too (the script [launch_workers.sh](launch_workers.sh) will do it as well)
-
+optionally you can build the [worker](worker.go) program too (the script [launch_workers.sh](launch_workers.sh) will do it as well)
 ```
-go build worker.go
+$ go build worker.go
 ```
 
 ## Running
 
 To run the application first launch a set of workers using the shell script [launch_workers.sh](launch_workers.sh) specifying the number of workers you want to deploy
 ```
-./lauch_workers.sh 5
+$ ./launch_workers.sh 5
 ```
-With the above code example, 5 workers will be launched on the localhost and will be listening on OS-assigned ports.
+with the above code example, 5 workers will be launched on the localhost and will be listening on OS-assigned ports.
 The wlcount client will read a local configuration file (automatically generated) in order to get the addresses and connect to them, to run it simply type the following code on a different terminal (in order to not confuse programs' printings)
 ```
-./wlcount file1 [file2 ...]
+$ ./wlcount file1 [file2 ...]
 ```
 where *file1* and *file2* are the names of the files you want to count the words' lengths.
 Otherwise the workers can be run manually either on several terminals or in the same one running them in background, but it is important to remember to **delete *address.config*** file before each time you want to run a set of workers.
 
+The workers can be shutted down using the *killall* command, for example:
+```
+$ killall worker
+```
+and if you run the workers manually delete the *address.config* file that was generated:
+```
+$ rm address.config
+```
 ### Running Example
+
 First launch a set of 5 workers, they will be sent in backround.
 ```
 ~/go/src/github.com/smvfal/wlcount$ ./launch_workers.sh 5
@@ -73,7 +81,7 @@ Length | Count
     11 | 2
 ---------------
 ```
-And on the server(worker) side you should have an output like this:
+on the server(worker) side you should have an output like this:
 ```
 22867 :  mapping..
 22869 :  mapping..
@@ -96,7 +104,8 @@ And on the server(worker) side you should have an output like this:
 22890 :  reduce complete!
 22892 :  reduce complete!
 ```
-The number on the left side is the PID of the worker executing the task.
+the number on the left side is the PID of the worker executing the task.
+
 ## Authors
 
 * **Simone Falvo**
