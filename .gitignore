@@ -16,3 +16,7 @@
 
 # Auto-generated configs
 *.config
+
+# Builds
+wlcount
+worker

@@ -11,12 +11,13 @@ import (
 
 func main() {
 
+	mr := new(mapreduce.MapReduce)
+
 	// Register a new rpc server and the struct created above.
-	word := new(mapreduce.Word)
 	server := rpc.NewServer()
-	err := server.RegisterName("MapReduce", word)
+	err := server.RegisterName("MapReduce", mr)
 	if err != nil {
-		log.Fatal("Format of service Arith is not correct: ", err)
+		log.Fatal("Format of service MapReduce is not correct: ", err)
 	}
 	// Register an HTTP handler for RPC messages on rpcPath, and a debugging handler on debugPath
 	server.HandleHTTP("/", "/debug")

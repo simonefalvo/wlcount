@@ -68,3 +68,10 @@ func SplitFile(file *os.File, n int) []string {
 	}
 	return chunks
 }
+
+// Put the values of temp map into destination map dst
+func MergeMaps(dst *map[int][]string, temp map[int][]string) {
+	for k, l := range temp {
+		(*dst)[k] = append((*dst)[k], l...)
+	}
+}
