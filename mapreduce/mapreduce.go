@@ -31,22 +31,20 @@ func (t *Word) Map(chunk string, result *map[int][]string) error {
 		return err
 	}
 
-	*result = res;
+	*result = res
 	fmt.Println(os.Getpid(), ":  map complete!")
 	return nil
 }
 
 
 func (t *Word) Reduce(reduceMap map[int][]string, result *map[int]int) error {
-
 	fmt.Println(os.Getpid(), ":  reducing..")
 	for k, words := range reduceMap {
 		// could it be 	(*result)[k] = len(words)
-		for _ = range words {
+		for range words {
 			(*result)[k]++
 		}
 	}
-
 	fmt.Println(os.Getpid(), ":  reduce complete!")
 	return nil
 }
